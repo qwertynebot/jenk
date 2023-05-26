@@ -1,1 +1,1 @@
-echo "Hello worl"
+apt install mc
