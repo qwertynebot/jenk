@@ -2,4 +2,5 @@
 //  groovy Jenkinsfile
 agent { 
  label 'main'
+ run 'jek.sh'
       }
