@@ -1,0 +1,12 @@
+pipeline {
+    agent {
+        label 'main'
+    }
+    stages {
+        stage('Run Script') {
+            steps {
+                sh 'jek.sh'
+            }
+        }
+    }
+}
