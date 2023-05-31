@@ -1,6 +1,29 @@
 #!groovy
 //  groovy Jenkinsfile
-agent { 
- label 'main'
- run 'jek.sh'
-      }
+properties([disableConcurrentBuilds()])
+pipeline {
+    agent { 
+           label ''
+        }
+        docker {
+            image 'ubuntu'
+            args '-u root' // Запуск контейнера з правами root
+        }
+    
+    
+    stages {
+        stage('Install Docker') {
+            steps {
+                sh 'apt-get update'
+                sh 'apt-get install -y docker.io'
+            }
+        }
+        
+        stage('Install MC, Vim, Zip') {
+            steps {
+                sh 'apt-get update'
+                sh 'apt-get install -y mc vim zip'
+            }
+        }
+    }
+}
