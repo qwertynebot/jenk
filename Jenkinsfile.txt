@@ -31,7 +31,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache --no-ignore -t makson8286/zabk:pos  ."
+                    sh "docker build --no-cache -t makson8286/zabk:pos  ."
                 }
             }
         }
