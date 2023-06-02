@@ -16,14 +16,14 @@ pipeline  {
             steps {
                 sh '''
                 docker network create zabbix-net
-                docker run
-                --name zabbix-postgres
-                --network zabbix-net
-                -v /var/lib/zabbix/timezone:/etc/timezone
-                -v /var/lib/zabbix/localtime:/etc/localtime
-                -e POSTGRES_PASSWORD=zabbix
-                -e POSTGRES_USER=zabbix
-                -d postgres:alpine
+                docker run \
+                --name zabbix-postgres \
+                --network zabbix-net \
+                -v /var/lib/zabbix/timezone:/etc/timezone \
+                -v /var/lib/zabbix/localtime:/etc/localtime \
+                -e POSTGRES_PASSWORD=zabbix \
+                -e POSTGRES_USER=zabbix \
+                -d postgres:alpine \
                 '''
             }
         }
