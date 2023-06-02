@@ -21,9 +21,7 @@ pipeline  {
                 --network zabbix-net \
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
-                -e POSTGRES_PASSWORD=zabbix \
-                -e POSTGRES_USER=zabbix \
-                -d postgres:alpine
+                -d makson8286/zabbix:postgres
                 '''
             }
         }
@@ -45,10 +43,7 @@ pipeline  {
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -p 10051:10051 \
-                -e DB_SERVER_HOST="zabbix-postgres" \
-                -e POSTGRES_USER="zabbix" \
-                -e POSTGRES_PASSWORD="zabbix" \
-                -d zabbix/zabbix-server-pgsql:alpine-latest
+                -d makson8286/zabbix:zab-serv
                 '''
             }
         }
@@ -65,16 +60,13 @@ pipeline  {
                 sh '''
                 docker run \
                 --name zabbix-web \
-                -p 80:8080 -p 443:8443 \
+                -p 80:8080 \
+                -p 443:8443 \
                 --network zabbix-net \
-                -e DB_SERVER_HOST="zabbix-postgres" \
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
-                -e POSTGRES_USER="zabbix" \
-                -e POSTGRES_PASSWORD="zabbix" \
-                -e ZBX_SERVER_HOST="zabbix-server" \
                 -e PHP_TZ="Europe/Kiev" \
-                -d zabbix/zabbix-web-nginx-pgsql:alpine-latest
+                -d makson8286/zabbix:zab-web
                 '''
             }
         }
