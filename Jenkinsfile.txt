@@ -23,7 +23,7 @@ pipeline  {
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -e POSTGRES_PASSWORD=zabbix \
                 -e POSTGRES_USER=zabbix \
-                -d postgres:alpine \
+                -d postgres:alpine
                 '''
             }
         }
