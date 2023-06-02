@@ -51,7 +51,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t makson8286/zabk:serv  ."
+                    sh "docker build --no-cache -t makson8286/zabv:serv  ."
                 }
             }
         }
@@ -74,7 +74,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t makson8286/zabk:webm  . "
+                    sh "docker build --no-cache -t makson8286/zabm:webm  . "
                 }
             }
         }
@@ -93,8 +93,8 @@ pipeline  {
                 echo " ============== pushing image =================="
                 sh '''
                 docker push makson8286/zabk:pos
-                docker push makson8286/zabk:serv
-                docker push makson8286/zabk:webm
+                docker push makson8286/zabv:serv
+                docker push makson8286/zabm:webm
                 '''
             }
         }
