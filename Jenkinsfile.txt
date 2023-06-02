@@ -15,7 +15,6 @@ pipeline  {
         stage("Postgres") {
             steps {
                 sh '''
-                docker network create zabbix-net
                 docker run \
                 --name zabbix-postgres \
                 --network zabbix-net \
@@ -28,7 +27,7 @@ pipeline  {
         stage("Create docker image Postgres") {
             steps {
                 echo 'Creating docker image ...'
-                dir('.'){
+                dir('path/to/dockerfile'){
                     sh "docker build --no-cache -t makson8286/zabk:pos  . "
                 }
             }
@@ -36,7 +35,6 @@ pipeline  {
         stage("Zab-serv") {
             steps {
                 sh '''
-                docker network create zabbix-net
                 docker run \
                 --name zabbix-server \
                 --network zabbix-net \
@@ -59,7 +57,6 @@ pipeline  {
         stage("Zab-web") {
             steps {
                 sh '''
-                docker network create zabbix-net
                 docker run \
                 --name zabbix-web \
                 -p 80:8080 \
