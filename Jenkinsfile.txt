@@ -51,7 +51,7 @@ pipeline  {
         stage("Create docker image Zab-serv") {
             steps {
                 echo 'Creating docker image ...'
-                dir('.'){
+                dir('path/to/dockerfile'){
                     sh "docker build --no-cache -t makson8286/zabk:serv  . "
                 }
             }
