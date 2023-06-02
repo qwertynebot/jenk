@@ -22,7 +22,6 @@ pipeline  {
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -d makson8286/zabbix:postgres
-                docker tag makson8286/zabbix:postgres makson8286/zabk:pos
                 '''
             }
         }
@@ -30,7 +29,10 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t makson8286/zabk:pos  ."
+                    sh '''
+                    docker build --no-cache -t makson8286/zabk:pos  .
+                    docker tag makson8286/zabbix:postgres makson8286/zabk:pos
+                    '''
                 }
             }
         }
@@ -45,7 +47,6 @@ pipeline  {
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -p 10051:10051 \
                 -d makson8286/zabbix:zab-serv
-                docker tag makson8286/zabbix:zab-serv makson8286/zabv:serv
                 '''
             }
         }
@@ -53,7 +54,10 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t makson8286/zabv:serv  ."
+                    sh '''
+                    docker build --no-cache -t makson8286/zabv:serv  .
+                    docker tag makson8286/zabbix:zab-serv makson8286/zabv:serv
+                    '''
                 }
             }
         }
@@ -69,7 +73,6 @@ pipeline  {
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -e PHP_TZ="Europe/Kiev" \
                 -d makson8286/zabbix:zab-web
-                docker tag makson8286/zabbix:zab-web makson8286/zabm:webm
                 '''
             }
         }
@@ -77,7 +80,10 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t makson8286/zabm:webm  . "
+                    sh '''
+                    docker build --no-cache -t makson8286/zabm:webm  . 
+                    docker tag makson8286/zabbix:zab-web makson8286/zabm:webm
+                    '''
                 }
             }
         }
