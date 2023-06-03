@@ -24,11 +24,11 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/dik/Makson8286/jenk/Postgres
-                docker build -t makson8286/zabk:post
+                docker build -t makson8286/zabk:post .
                 cd /home/dik/Makson8286/jenk/Zab-serv
-                docker build -t makson8286/zabk:serv
+                docker build -t makson8286/zabk:serv .
                 cd /home/dik/Makson8286/jenk/Zab-web
-                docker build -t makson8286/zabk:web
+                docker build -t makson8286/zabk:web .
                 '''
             }
         } 
