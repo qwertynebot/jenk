@@ -15,19 +15,20 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
-                cd /home/dik
-                git clone Makson8286/jenk            
+                mkdir -p gitr
+                cd /home/dik/gitr/
+                git clone https://github.com/Makson8286/jenk           
                 '''
             }
         }    
         stage("Build") {
             steps {
                 sh '''
-                cd /home/dik/Makson8286/jenk/Postgres
+                cd /home/dik/gitr/Makson8286/jenk/Postgres
                 docker build -t makson8286/zabk:post .
-                cd /home/dik/Makson8286/jenk/Zab-serv
+                cd /home/dik/gitr/Makson8286/jenk/Zab-serv
                 docker build -t makson8286/zabk:serv .
-                cd /home/dik/Makson8286/jenk/Zab-web
+                cd /home/dik/gitr/Makson8286/jenk/Zab-web
                 docker build -t makson8286/zabk:web .
                 '''
             }
