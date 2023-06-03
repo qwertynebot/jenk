@@ -24,11 +24,11 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
-                cd /home/dik/gitr/Makson8286/jenk/Postgres
+                cd /home/dik/gitr/jenk/Postgres
                 docker build -t makson8286/zabk:post .
-                cd /home/dik/gitr/Makson8286/jenk/Zab-serv
+                cd /home/dik/gitr/jenk/Zab-serv
                 docker build -t makson8286/zabk:serv .
-                cd /home/dik/gitr/Makson8286/jenk/Zab-web
+                cd /home/dik/gitr/jenk/Zab-web
                 docker build -t makson8286/zabk:web .
                 '''
             }
