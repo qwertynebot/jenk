@@ -31,7 +31,6 @@ pipeline  {
                 dir('.'){
                     sh '''
                     docker build --no-cache -t makson8286/zabk:pos  .
-                    docker tag makson8286/zabbix:postgres makson8286/zabk:pos
                     '''
                 }
             }
@@ -56,7 +55,6 @@ pipeline  {
                 dir('.'){
                     sh '''
                     docker build --no-cache -t makson8286/zabv:serv  .
-                    docker tag makson8286/zabbix:zab-serv makson8286/zabv:serv
                     '''
                 }
             }
@@ -82,7 +80,6 @@ pipeline  {
                 dir('.'){
                     sh '''
                     docker build --no-cache -t makson8286/zabm:webm  . 
-                    docker tag makson8286/zabbix:zab-web makson8286/zabm:webm
                     '''
                 }
             }
