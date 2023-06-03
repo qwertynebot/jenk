@@ -12,6 +12,26 @@ pipeline  {
         timestamps()
     }
     stages {
+        stage("Git clone") {
+            steps {
+                sh '''
+                cd /home/dik/
+                git clone Makson8286/jenk            
+                '''
+            }
+        }    
+        stage("Build") {
+            steps {
+                sh '''
+                cd /home/dik/Makson8286/jenk/Postgres/
+                docker build -t makson8286/zabk:post
+                cd /home/dik/Makson8286/jenk/Zab-serv/
+                docker build -t makson8286/zabk:serv
+                cd /home/dik/Makson8286/jenk/Zab-web/
+                docker build -t makson8286/zabk:web
+                '''
+            }
+        } 
         stage("Postgres") {
             steps {
                 sh '''
@@ -21,18 +41,8 @@ pipeline  {
                 --network zabbix-net \
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
-                -d makson8286/zabbix:postgres
+                -d makson8286/zabk:post
                 '''
-            }
-        }
-        stage("Create docker image Postgres") {
-            steps {
-                echo 'Creating docker image ...'
-                dir('.'){
-                    sh '''
-                    docker build --no-cache -t makson8286/zabk:pos  .
-                    '''
-                }
             }
         }
         stage("Zab-serv") {
@@ -45,18 +55,8 @@ pipeline  {
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -p 10051:10051 \
-                -d makson8286/zabbix:zab-serv
+                -d makson8286/zabk:serv
                 '''
-            }
-        }
-        stage("Create docker image Zab-serv") {
-            steps {
-                echo 'Creating docker image ...'
-                dir('.'){
-                    sh '''
-                    docker build --no-cache -t makson8286/zabv:serv  .
-                    '''
-                }
             }
         }
         stage("Zab-web") {
@@ -70,18 +70,8 @@ pipeline  {
                 -v /var/lib/zabbix/timezone:/etc/timezone \
                 -v /var/lib/zabbix/localtime:/etc/localtime \
                 -e PHP_TZ="Europe/Kiev" \
-                -d makson8286/zabbix:zab-web
+                -d makson8286/zabk:web
                 '''
-            }
-        }
-        stage("Create docker image Zab-web") {
-            steps {
-                echo 'Creating docker image ...'
-                dir('.'){
-                    sh '''
-                    docker build --no-cache -t makson8286/zabm:webm  . 
-                    '''
-                }
             }
         }
         stage("docker login") {
@@ -98,9 +88,9 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push makson8286/zabk:pos
-                docker push makson8286/zabv:serv
-                docker push makson8286/zabm:webm
+                docker push makson8286/zabk:post
+                docker push makson8286/zabk:serv
+                docker push makson8286/zabk:web
                 '''
             }
         }
