@@ -16,7 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/dik/gitr/
-                git clone https://github.com/qwertynebot/jenk           
+                git clone https://github.com/qwertynebot/zabbix     
                 '''
             }
         }    
