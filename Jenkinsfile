@@ -16,11 +16,11 @@ pipeline  {
             steps {
                 sh '''
                 cd /var/lib/jenkins/workspace/zabbix/Postgres
-                docker build -t darkne24/zabk:postg .
+                docker build -t darkne24/zabk:post .
                 cd /var/lib/jenkins/workspace/zabbix/Zab-serv
-                docker build -t darkne24/zabk:serve .
+                docker build -t darkne24/zabk:serv .
                 cd /var/lib/jenkins/workspace/zabbix/Zab-web
-                docker build -t darkne24/zabk:webs .
+                docker build -t darkne24/zabk:web .
                 '''
             }
         } 
@@ -79,9 +79,9 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push darkne24/zabk:postg
-                docker push darkne24/zabk:serve
-                docker push darkne24/zabk:webs
+                docker push darkne24/zabk:post
+                docker push darkne24/zabk:serv
+                docker push darkne24/zabk:web
                 '''
             }
         }
