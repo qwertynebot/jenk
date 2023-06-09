@@ -15,7 +15,6 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
-                cd /home/dik/gitr/
                 git clone https://github.com/qwertynebot/zabbix     
                 '''
             }
@@ -23,11 +22,8 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
-                cd /home/dik/gitr/jenk/Postgres
                 docker build -t darkne24/zabk:post .
-                cd /home/dik/gitr/jenk/Zab-serv
                 docker build -t darkne24/zabk:serv .
-                cd /home/dik/gitr/jenk/Zab-web
                 docker build -t darkne24/zabk:web .
                 '''
             }
