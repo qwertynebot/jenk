@@ -15,8 +15,11 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
+                cd /var/lib/jenkins/workspace/zabbix/Postgres
                 docker build -t darkne24/zabk:post .
+                cd /var/lib/jenkins/workspace/zabbix/Zab-serv
                 docker build -t darkne24/zabk:serv .
+                cd /var/lib/jenkins/workspace/zabbix/Zab-web
                 docker build -t darkne24/zabk:web .
                 '''
             }
