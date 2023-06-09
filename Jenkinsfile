@@ -12,13 +12,6 @@ pipeline  {
         timestamps()
     }
     stages {
-        stage("Git clone") {
-            steps {
-                sh '''
-                git clone https://github.com/qwertynebot/zabbix     
-                '''
-            }
-        }    
         stage("Build") {
             steps {
                 sh '''
