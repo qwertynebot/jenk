@@ -27,7 +27,6 @@ pipeline  {
         stage("Postgres") {
             steps {
                 sh '''
-                docker network create zabbix-net
                 docker run \
                 --name zabbix-postgres \
                 --network zabbix-net \
